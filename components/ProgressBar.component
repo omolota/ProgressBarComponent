@@ -1,0 +1,92 @@
+<apex:component controller="ProgressBarController">
+
+<apex:attribute name="value" required="true" type="String" assignTo="{!fieldValue}" description="Currently selected stage"/>
+<apex:attribute name="field" required="true" type="String" assignTo="{!fieldName}" description="The picklist field that forms progress bar" />
+<style>
+.stackedProgress {
+	display: table;
+	table-layout: fixed;
+	border-collapse: separate;
+	width: 100%;
+	padding: 0;
+    position: relative;
+}
+
+.stackedProgress li {
+	display: table-cell;
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #CC8904;
+	color: #E6940A;
+	background-color: #F3F3F3;
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+	
+}
+
+.stackedProgress li:after, .stackedProgress li:before {
+	border: solid transparent;
+	content: ' ';
+	height: 0;
+	left: 100%;
+	position: absolute;
+	width: 0;
+	z-index: 1;
+}
+
+.stackedProgress li:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.stackedProgress li:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.stackedProgress li:not(:last-child):after {
+	border-width: 25px;
+	border-left-color: #F3F3F3;
+	top: 0px;
+	right: 1px;
+}
+.stackedProgress li:not(:last-child):before {
+	border-width: 26px;
+	border-left-color: #CC8904;
+	top: -1px;
+	right: 1px;
+}
+
+.stackedProgress li.active {
+	color : white;
+	background-color: #EBB009;
+}
+
+.stackedProgress li.active:not(:last-child):after {
+	border-width: 25px;
+	border-left-color: #EBB009;
+	top: 0px;
+	right: 1px;
+}
+
+.stackedProgress li.active:not(:last-child):before {
+	border-width: 26px;
+	border-left-color: #CC8904;
+	top: -1px;
+	right: 1px;
+}
+</style>
+
+<ul class="stackedProgress">
+<apex:repeat value="{!activeLabels}" var="a">
+	<li class="active">{!a}</li>
+</apex:repeat>
+<apex:repeat value="{!inactiveLabels}" var="i">
+	<li>{!i}</li>
+</apex:repeat>
+</ul>
+
+</apex:component>
