@@ -2,6 +2,7 @@
 
 <apex:attribute name="value" required="true" type="String" assignTo="{!fieldValue}" description="Currently selected stage"/>
 <apex:attribute name="field" required="true" type="String" assignTo="{!fieldName}" description="The picklist field that forms progress bar" />
+
 <style>
 .stackedProgress {
 	display: table;
